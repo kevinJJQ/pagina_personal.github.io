@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre_mi - Kevin Jimenez</title>
+
+  <style>
+    /* ===== VARIABLES Y RESET ===== */
+    :root {
+      --bg:        #031b16;
+      --bg2:       #001a1a;
+      --accent:    #03fa0b;
+      --accent2:   #16a782;
+      --accent3:   #36cf7b;
+      --text:      #bbebcd;
+      --border:    rgb(0, 255, 85);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      padding: 16px;
+    }
+
+    /* ===== CONTENEDOR PRINCIPAL ===== */
+    .contenedor {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 8px;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #03fa0b37;
+      padding: 10px 20px;
+      gap: 10px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      color: rgb(0, 248, 87);
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+      gap: 12px;
+    }
+
+    .nav-links a {
+      color: rgb(0, 255, 119);
+      text-decoration: none;
+    }
+
+    .nav-links a:hover { color: #03e360bb; }
+
+    /* ===== ENCABEZADOS CON BOTÓN VOLVER ARRIBA ===== */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 30px 0 14px;
+    }
+
+    .section-header h2 {
+      color: var(--accent2);
+      font-size: clamp(1.1rem, 4vw, 1.4rem);
+    }
+
+    .section-header.center { justify-content: center; gap: 16px; }
+
+    .btn-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background-color: #03fa0b20;
+      color: var(--accent3);
+      border: 1px solid var(--accent3);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-top:hover { background-color: #03fa0b40; }
+
+    /* ===== PERFIL ===== */
+    #inicio h1  { color: var(--accent3); margin-bottom: 4px; }
+    #inicio p   { color: var(--accent2); margin-bottom: 16px; }
+
+    .image-profile {
+      width: clamp(100px, 20%, 180px);
+      display: block;
+      margin: 0 auto;
+      border-radius: 8px;
+    }
+
+    figcaption {
+      color: var(--accent3);
+      text-align: center;
+      margin-top: 6px;
+      margin-bottom: 20px;
+    }
+
+    /* ===== TABLAS ===== */
+    .tabla-responsive { width: 100%; overflow-x: auto; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px;
+      vertical-align: top;
+    }
+
+    th  { color: var(--accent3); }
+    td  { color: var(--text); }
+
+    .tabla-datos { max-width: 600px; margin: 0 auto; }
+
+    /* ===== PÁRRAFOS Y LISTAS ===== */
+    p      { color: var(--text); line-height: 1.6; margin-bottom: 10px; }
+    ul     { padding-left: 20px; margin-bottom: 16px; }
+    ul li  { color: var(--text); margin-bottom: 4px; }
+
+    /* ===== IFRAMES (canciones) ===== */
+    .iframe-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 */
+      overflow: hidden;
+    }
+
+    .iframe-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+
+    /* Celdas de canciones apiladas en móvil */
+    .tabla-canciones tr { display: flex; flex-wrap: wrap; }
+    .tabla-canciones td { flex: 1 1 300px; }
+
+    /* ===== SCROLL PERSONALIZADO ===== */
+    .scroll-personalizado {
+      width: 100%;
+      height: 220px;
+      overflow: auto;
+      scrollbar-color: var(--accent2) var(--bg2);
+      scrollbar-width: thin;
+    }
+
+    .scroll-personalizado::-webkit-scrollbar       { width: 8px; }
+    .scroll-personalizado::-webkit-scrollbar-track  { background: var(--bg2); }
+    .scroll-personalizado::-webkit-scrollbar-thumb  { background: var(--accent2); border-radius: 5px; }
+
+    /* ===== CARRUSEL ===== */
+    .carrusel-wrap {
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    .carrusel-img-box {
+      width: 100%;
+      height: 240px;
+      overflow: hidden;
+      border-radius: 10px;
+      border: 2px solid var(--accent2);
+    }
+
+    .carrusel-img-box img { width: 100%; height: 100%; object-fit: cover; }
+
+    .carrusel-btns { margin-top: 10px; display: flex; gap: 10px; justify-content: center; }
+
+    .carrusel-btns button {
+      padding: 8px 18px;
+      cursor: pointer;
+      background: var(--accent2);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.9rem;
+    }
+
+    /* ===== MARQUEE FC24 ===== */
+    .marquee-wrap {
+      width: 100%;
+      border: 2px solid var(--accent2);
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: var(--bg2);
+    }
+
+    /* ===== MISIÓN / VISIÓN ===== */
+    .tabla-mision { max-width: 600px; margin: 0 auto; }
+
+    blockquote {
+      color: var(--accent3);
+      font-style: italic;
+      padding: 10px 0;
+    }
+
+    blockquote p   { color: var(--accent3); }
+    blockquote span{ display: block; margin-top: 8px; font-weight: bold; }
+
+    /* ===== REDES ===== */
+    .tabla-redes { max-width: 600px; margin: 0 auto; }
+
+    a.social-link {
+      color: #00ff40;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a.social-link:hover { text-decoration: underline; }
+
+    /* ===== FOOTER ===== */
+    hr  { border-color: var(--accent2); margin: 24px 0 10px; }
+    footer p { color: var(--accent2); text-align: center; padding-bottom: 10px; }
+
+    /* ===== RESPONSIVE EXTRA ===== */
+    @media (max-width: 600px) {
+      .navbar { flex-direction: column; align-items: flex-start; }
+      .nav-links { gap: 8px; font-size: 0.9rem; }
+      .tabla-canciones td { flex: 1 1 100%; }
+      .carrusel-img-box { height: 180px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===== ANCLA INICIO ===== -->
+  <div id="inicio"></div>
+
+  <div class="contenedor">
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+      <div class="logo">El sitio de kevin</div>
+      <ul class="nav-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#datos-personales">Datos personales</a></li>
+        <li><a href="#cancion-favorita">Canción Favorita</a></li>
+        <li><a href="#juegos-favoritos">Juegos Favoritos</a></li>
+        <li><a href="#Mision">Misión Visión</a></li>
+        <li><a href="#Redes">Mis Redes</a></li>
+      </ul>
+    </nav>
+
+    <!-- ===== PRESENTACIÓN ===== -->
+    <h1 style="color:#36cf7b;">Kevin Jimenez</h1>
+    <p style="color:#0ac47c; margin-bottom:14px;">Estudiante</p>
+
+    <figure>
+      <img class="image-profile" src="foto.jpeg" alt="Foto de Perfil de Kevin">
+      <figcaption>Kevin Jimenez - Student</figcaption>
+    </figure>
+
+    <!-- ===== DATOS PERSONALES ===== -->
+    <div id="datos-personales"></div>
+    <div class="section-header center">
+      <h2>Datos personales</h2>
+      <a class="btn-top" href="#inicio">&#8679; Volver arriba</a>
+    </div>
+
+    <div class="tabla-responsive">
+      <table class="tabla-datos">
+        <thead>
+          <tr>
+            <th>Dato</th>
+            <th>Información</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="color:#36cf7b;">Nombre</td>   <td>Kevin Jheferson Jimenez Quisbert</td></tr>
+          <tr><td style="color:#36cf7b;">Edad</td>      <td>21 años</td></tr>
+          <tr><td style="color:#36cf7b;">Ciudad</td>    <td>La Paz, Bolivia</td></tr>
+          <tr><td style="color:#36cf7b;">Correo</td>    <td>jimenezquisbertk@gmail.com</td></tr>
+          <tr><td style="color:#36cf7b;">Domicilio</td> <td>Z. Achachicala N.-227</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:16px;">
+      Hola, soy Kevin Jheferson Jimenez Quisbert, un
+      <strong style="color:#75da9b;">estudiante de la carrera de Ingeniería de Sistemas</strong>
+      de la Universidad Salesiana. Me encanta descubrir las tecnologías para el
+      <em>desarrollo y creación de proyectos.</em>
+      Soy un estudiante participativo que busca proponer nuevas ideas de desarrollo y mejorar
+      tanto académicamente como personalmente.
+    </p>
+    <p>
+      Mi objetivo es crear proyectos con <strong>impacto real</strong>
+      que sean <em>accesibles para todos</em>.
+    </p>
+
+    <!-- ===== DATOS GENERALES ===== -->
+    <div class="section-header">
+      <h2>Datos Generales</h2>
+      <a class="btn-top" href="#inicio">&#8679; Volver arriba</a>
+    </div>
+    <ul>
+      <li>Jugar fútbol</li>
+      <li>Practicar código</li>
+      <li>Jugar videojuegos</li>
+      <li>Estudiar</li>
+      <li>Jugar Wally</li>
+    </ul>
+
+    <!-- ===== CANCIÓN FAVORITA ===== -->
+    <div id="cancion-favorita"></div>
+    <div class="section-header">
+      <h2>Canción Favorita</h2>
+      <a class="btn-top" href="#inicio">&#8679; Volver arriba</a>
+    </div>
+
+    <div class="tabla-responsive">
+      <table class="tabla-canciones">
+        <thead>
+          <tr>
+            <th>Video</th>
+            <th>Letra</th>
+          </tr>
+          <tr>
+            <td colspan="2" style="color:#36cf7b;">Study me - Zutomayo</td>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Canción 1 -->
+          <tr>
+            <td>
+              <div class="iframe-wrap">
+                <iframe src="https://www.youtube.com/embed/iJfIYcG4cV4?si=BX-OWEjIcT0UciNB"
+                  title="Study me - Zutomayo"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+            </td>
+            <td>
+              <div class="scroll-personalizado">
+                <p>shitsu no ii yami kanjou ga afureta toki no<br>
+                shou ga nai tte kotoba wa terekusai<br>
+                souzouryoku ga mugendai miryokutekina no de<br>
+                imi wakannai kotoba ni mo kitai shite ii</p>
+                <p>kinou no omoide osentaku shitatte ai kawarazu<br>
+                kawakanai ya samugarina kisetsu ni<br>
+                aa mottaibutte ii kara kono manma<br>
+                yakiyaki da oshitsubusareru mutekime<br>
+                homeai raimu aizu kawarazu<br>
+                kawakanai ya tsuyogarina kisetsu ni<br>
+                aa mottaibutte ii kara kono manma<br>
+                yankii yankii da genjou iji no mutekime uooo</p>
+                <p>fankii na chokkan de<br>
+                kyou no uta datte kawatte yukunara<br>
+                sonna riyuu de tobikonde mitai kedo<br>
+                tada nakitakute, hakattoite<br>
+                atsumechatta kanjou sankousho desu<br>
+                obenkyou shitoite yo toitoite yo</p>
+                <p>(kyou doushi yo?) mo<br>
+                maemuki ni (nanji made dakke?) sura<br>
+                kikikaesenai abunai kara<br>
+                kenkou de itai semete<br>
+                kekkyoku koko made kimochi<br>
+                sodaterarete shimatta koto ga subete<br>
+                kenson shiteru kedo yamitakunai kara<br>
+                koko de itte</p>
+                <p>kyonen no omoide osentaku shitatte ai kawarazu<br>
+                kawakanai ya samugarina kisetsu ni<br>
+                aa mottaibutte ii kara kono manma<br>
+                yakiyaki da oshitsubusareru mutekime<br>
+                homeai raimu aizu kawarazu<br>
+                kawakanai ya tsuyogarina kisetsu ni<br>
+                aa mottaibutte ii kara kono manma<br>
+                yankii yankii da genjou iji no mutekime uooo</p>
+                <p>watashi wo sukoshi demo omou yowasa ga<br>
+                kimi wo kurushimete imasu you ni<br>
+                sore sura mo shou ga nai tte omoeru hodo<br>
+                onaji kurai hitatte kurete imasu you ni<br>
+                watashi wo sukoshi demo omou tsuyosa ga<br>
+                kimi wo nayamasete imasu you ni<br>
+                kotae wo gisei ni shitatte kizutsuketatte<br>
+                shou ga nai tte itai tte akarui mitai da ne</p>
+              </div>
+            </td>
+          </tr>
+          <!-- Canción 2 -->
+          <tr>
+            <td>
+              <div class="iframe-wrap">
+                <iframe src="https://www.youtube.com/embed/hm8-FPojHl4?si=6YhmWOj_tS8ToAfM"
+                  title="Can't Give Up"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+            </td>
+            <td>
+              <div class="scroll-personalizado">
+                <p>Not done fightin', I don't feel I've lost<br>
+                Am I dreamin', is there more like us?<br>
+                Got me feeling like it's all too much<br>
+                I feel beaten, but I can't give up</p>
+                <p>Uh, wakin' up, feelin' like the thankful one<br>
+                Count up my ones, lacin' up my favorite 1's<br>
+                One of a kind, one of one, the only one<br>
+                Got one shot and one chance to take it once</p>
+                <p>Not done fightin' (no way), I don't fear I've lost<br>
+                Am I dreamin', is there more like us?<br>
+                Got me feeling (no way), like it's all too much<br>
+                I feel beaten, but I can't give up</p>
+                <p>I can't find it in myself to just walk away<br>
+                I can't find it in myself to lose everything<br>
+                Feel everyone's against me, don't want me to be great<br>
+                Things might look bad, I'm afraid to look death in the face</p>
+                <p>Can't give up<br>
+                Can't give, can't give up<br>
+                Can't give, can't give up<br>
+                Can't give up</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===== JUEGOS FAVORITOS ===== -->
+    <div id="juegos-favoritos"></div>
+    <div class="section-header">
+      <h2>Juego Favorito</h2>
+      <a class="btn-top" href="#inicio">&#8679; Volver arriba</a>
+    </div>
+
+    <div class="tabla-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Juego</th>
+            <th>Imagen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- FC 24 -->
+          <tr>
+            <td style="color:#36cf7b; white-space:nowrap;">FC 24</td>
+            <td>
+              <div class="marquee-wrap">
+                <marquee behavior="alternate" scrollamount="10"
+                  onmouseover="this.stop();" onmouseout="this.start();">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTws4C1Pyl0xqmMUql2fbCZC0RFkl8eRPQA2Q&s"
+                    style="height:160px; margin-right:10px;" alt="FC24">
+                  <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/ee/Morecambe_FC_crest.svg/1280px-Morecambe_FC_crest.svg.png"
+                    style="height:160px; margin-right:10px;" alt="Morecambe FC">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn-l2Ny0uS-OBrmDOtlvUGnjkroJX1-HZW_w&s"
+                    style="height:160px; margin-right:10px;" alt="FC24 2">
+                  <img src="trofeos.jpeg" style="height:160px; margin-right:10px;" alt="Trofeos">
+                </marquee>
+              </div>
+            </td>
+          </tr>
+          <!-- Fortnite -->
+          <tr>
+            <td style="color:#36cf7b; white-space:nowrap;">Fortnite</td>
+            <td>
+              <div class="carrusel-wrap">
+                <div class="carrusel-img-box">
+                  <img id="img-actual" src="https://gaming-cdn.com/images/news/articles/9474/cover/1000x563/el-trailer-de-lanzamiento-del-capitulo-6-de-fortnite-se-ha-filtrado-desvelando-a-godzilla-y-otras-sorpresas-cover6749c0e63f4f2.jpg" alt="Fortnite">
+                </div>
+                <div class="carrusel-btns">
+                  <button onclick="cambiarFoto(-1)">&#8592; Anterior</button>
+                  <button onclick="cambiarFoto(1)">Siguiente &#8594;</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===== MISIÓN / VISIÓN ===== -->
+    <div id="Mision"></div>
+    <div class="section-header center">
+      <h2>Misión &amp; Visión</h2>
+      <a class="btn-top" href="#inicio">&#8679; Volver arriba</a>
+    </div>
+
+    <div class="tabla-responsive">
+      <table class="tabla-mision">
+        <thead>
+          <tr>
+            <th>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe39GUQ6-5Z88sTX4KxGMRVgExONzwOkroFQ&s"
+                alt="Misión Visión" style="width:100%; max-width:300px; display:block; margin:0 auto;">
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <blockquote>
+                "Si me caigo me levanto tres veces para regresar con más fuerza."
+                <p>Mi objetivo es crear proyectos con <strong>impacto real</strong>
+                  que sean <em>accesibles para todos a 5 años</em>.</p>
+                <span>— Jimenez</span>
+              </blockquote>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===== TAREAS DESTACADAS ===== -->
+    <div class="section-header">
+      <h2>Tareas destacadas</h2>
+      <a class="btn-top" href="#inicio">&#8679; Volver arriba</a>
+    </div>
+    <ul>
+      <li>Sistema de gestión de laboratorios</li>
+      <li>Sistema de atención en clínicas</li>
+      <li>APP en realidad aumentada</li>
+    </ul>
+
+    <!-- ===== REDES SOCIALES ===== -->
+    <div id="Redes"></div>
+    <div class="section-header center">
+      <h2>Mis Redes</h2>
+      <a class="btn-top" href="#inicio">&#8679; Volver arriba</a>
+    </div>
+
+    <div class="tabla-responsive">
+      <table class="tabla-redes">
+        <thead>
+          <tr>
+            <th>Red</th>
+            <th>Enlace</th>
+            <th>Contenido</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:#36cf7b;">Facebook</td>
+            <td><a class="social-link" href="https://www.facebook.com/jimenezquisbertk" target="_blank">Kevin Jimenez</a></td>
+            <td>Cuenta personal</td>
+          </tr>
+          <tr>
+            <td style="color:#36cf7b;">GitHub</td>
+            <td><a class="social-link" href="https://github.com/kevinJJQ" target="_blank">@kevinJJQ</a></td>
+            <td>Algunos proyectos</td>
+          </tr>
+          <tr>
+            <td style="color:#36cf7b;">TikTok</td>
+            <td><a class="social-link" href="https://www.tiktok.com/@kevinjimenez5080" target="_blank">@kevinjimenez5080</a></td>
+            <td>Cuenta personal</td>
+          </tr>
+          <tr>
+            <td style="color:#36cf7b;">Ubicación</td>
+            <td>
+              <a class="social-link"
+                href="https://www.google.com/maps/place/Universidad+Salesiana+de+Bolivia/@-16.4782409,-68.1519506,17z"
+                target="_blank">Ver en Google Maps</a>
+            </td>
+            <td>Z. Achachicala</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr>
+    <footer>
+      <p>Página creada por Kevin Jimenez — 2026</p>
+    </footer>
+
+  </div><!-- fin .contenedor -->
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // Carrusel Fortnite
+    const imagenes = [
+      "https://gaming-cdn.com/images/news/articles/9474/cover/1000x563/el-trailer-de-lanzamiento-del-capitulo-6-de-fortnite-se-ha-filtrado-desvelando-a-godzilla-y-otras-sorpresas-cover6749c0e63f4f2.jpg",
+      "https://static1-es.millenium.gg/articles/6/36/86/6/@/172356-fishstick-orig-2-article_cover_bd-1.jpg",
+      "https://imagenes.hobbyconsolas.com/files/image_640_360/uploads/imagenes/2023/04/25/69018f2b5135b.jpeg"
+    ];
+    let indiceActual = 0;
+
+    function cambiarFoto(dir) {
+      indiceActual = (indiceActual + dir + imagenes.length) % imagenes.length;
+      document.getElementById("img-actual").src = imagenes[indiceActual];
+    }
+  </script>
+
+</body>
+</html>
